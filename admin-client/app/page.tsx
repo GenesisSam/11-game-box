@@ -135,26 +135,28 @@ function HomeInstance() {
             </ActionButtonContainer>
 
             <div className="list">
-              {Object.entries(games).map(([gameId, game], index) => (
-                <GameCell
-                  key={`${gameId}_${index}`}
-                  role="button"
-                  onClick={() => {
-                    setSelectGameId(gameId);
-                  }}
-                >
-                  <h3>#{gameId.toUpperCase()}</h3>
-                  <p>
-                    <strong>타입:</strong> {game.type}
-                    <br />
-                    <strong>콘텐츠:</strong> <span> {game.content}</span>
-                    <br />
-                    <strong>응답 제한 시간:</strong> {game.timeout}s
-                    <br />
-                    <strong>선택지:</strong> [{game.options}]
-                  </p>
-                </GameCell>
-              ))}
+              {Object.entries(games)
+                .reverse()
+                .map(([gameId, game], index) => (
+                  <GameCell
+                    key={`${gameId}_${index}`}
+                    role="button"
+                    onClick={() => {
+                      setSelectGameId(gameId);
+                    }}
+                  >
+                    <h3>#{gameId.toUpperCase()}</h3>
+                    <p>
+                      <strong>타입:</strong> {game.type}
+                      <br />
+                      <strong>콘텐츠:</strong> <span> {game.content}</span>
+                      <br />
+                      <strong>응답 제한 시간:</strong> {game.timeout}s
+                      <br />
+                      <strong>선택지:</strong> [{game.options}]
+                    </p>
+                  </GameCell>
+                ))}
             </div>
           </GameCard>
 
