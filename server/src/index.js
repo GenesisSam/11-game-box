@@ -84,7 +84,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("gameResponse", async (response) => {
-    await userResponseCsvWriter.writeRecords([response]);
+    await userResponseCsvWriter.writeRecords([
+      {
+        ...response,
+        timestamp: new Date().toISOString(),
+      },
+    ]);
   });
 
   socket.on("requestGameList", async () => {
