@@ -162,7 +162,7 @@ function HomeInstance() {
 
           <GameCard>
             <div className="list">
-              {gameResponse.map((response, index) => (
+              {gameResponse?.map((response, index) => (
                 <GameCell key={index}>
                   <div>
                     {response.userName}({response.userId}) 님이 선택한 옵션:{" "}
