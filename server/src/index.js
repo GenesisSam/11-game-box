@@ -5,8 +5,14 @@ const { instrument } = require("@socket.io/admin-ui");
 const { createObjectCsvWriter } = require("csv-writer");
 const fs = require("fs");
 const csv = require("csv-parser");
+const cors = require("cors");
 
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
@@ -29,6 +35,7 @@ const openedGamesCsvWriter = createObjectCsvWriter({
     { id: "content", title: "content" },
     { id: "timeout", title: "timeout" },
     { id: "options", title: "options" },
+    { id: "createAt", title: "createAt" },
   ],
   append: fs.existsSync("openedGames.csv"),
   writeHeaders: !fs.existsSync("openedGames.csv"),
@@ -42,6 +49,7 @@ const userResponseCsvWriter = createObjectCsvWriter({
     { id: "userId", title: "userId" },
     { id: "userName", title: "userName" },
     { id: "answer", title: "answer" },
+    { id: "timestamp", title: "timestamp" },
   ],
   append: fs.existsSync("userResponse.csv"),
   writeHeaders: !fs.existsSync("userResponse.csv"),
@@ -62,15 +70,28 @@ io.on("connection", (socket) => {
   socket.on("gameOpen", async (payload) => {
     const game = {
       ...payload,
-      options: payload.options ? JSON.stringify(payload.options) : undefined,
+      content: payload.content,
+      content: `"${payload.content.replace(/"/g, '""')}"`,
+      options: payload.options,
+      createAt: new Date().toISOString(),
     };
 
     await openedGamesCsvWriter.writeRecords([game]);
-    io.emit("gameOpen", payload);
+    socket.emit("gameOpenResponse", payload);
   });
 
   socket.on("gameResponse", async (response) => {
     await userResponseCsvWriter.writeRecords([response]);
+  });
+
+  socket.on("requestGameList", async () => {
+    const games = await readCsvFile("openedGames.csv");
+    socket.emit("gameListResponse", games);
+  });
+
+  socket.on("requestResponseList", async () => {
+    const responses = await readCsvFile("userResponse.csv");
+    socket.emit("responseListResponse", responses);
   });
 
   socket.on("gameStatus", async (gameId) => {
