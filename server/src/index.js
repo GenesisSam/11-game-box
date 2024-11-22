@@ -7,16 +7,24 @@ const fs = require("fs");
 const csv = require("csv-parser");
 const cors = require("cors");
 
+const CORS = [
+  "http://localhost:3000",
+  "http://appbuild.canlab.co:4711",
+  "http://appbuild.canlab.co:4710",
+  "https://admin.socket.io",
+];
+
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: CORS,
+    credentials: true,
   })
 );
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://admin.socket.io"],
+    origin: CORS,
     credentials: true,
   },
 });
