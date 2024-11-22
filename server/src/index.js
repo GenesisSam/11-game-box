@@ -7,9 +7,10 @@ const fs = require("fs");
 const csv = require("csv-parser");
 
 const CORS = [
-  "http://localhost:3000",
+  "http://localhost:4710",
   "http://appbuild.canlab.co:4711",
   "http://appbuild.canlab.co:4710",
+  "https://11plus.vingle.network",
   "https://admin.socket.io",
 ];
 
@@ -140,7 +141,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4710;
 httpServer.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
