@@ -71,22 +71,29 @@ const readCsvFile = (filePath) => {
 io.on("connection", (socket) => {
   socket.on("gameOpen", async (payload) => {
     const game = {
-      ...payload,
+      gameId: payload.gameId,
+      fixtureId: payload.fixtureId,
+      type: payload.type,
       content: payload.content,
       content: `"${payload.content.replace(/"/g, '""')}"`,
+      timeout: payload.timeout,
       options: payload.options,
       createAt: new Date().toISOString(),
     };
 
     await openedGamesCsvWriter.writeRecords([game]);
-    socket.emit("gameOpenResponse", payload);
-    io.emit("gameOpen", payload);
+    socket.emit("gameOpenResponse", game);
+    io.emit("gameOpen", game);
   });
 
   socket.on("gameResponse", async (response) => {
     await userResponseCsvWriter.writeRecords([
       {
-        ...response,
+        gameId: response.gameId,
+        fixtureId: response.fixtureId,
+        userId: response.userId,
+        userName: response.userName,
+        answer: response.answer,
         timestamp: new Date().toISOString(),
       },
     ]);
