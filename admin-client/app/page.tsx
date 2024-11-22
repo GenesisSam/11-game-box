@@ -242,8 +242,7 @@ function HomeInstance() {
                       options: options
                         .split(",")
                         .map((v) => v.trim())
-                        .filter(Boolean)
-                        .join(","),
+                        .filter(Boolean),
                     } as never);
                     e.currentTarget.reset();
                     setOpen(false);
