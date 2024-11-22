@@ -80,6 +80,7 @@ io.on("connection", (socket) => {
 
     await openedGamesCsvWriter.writeRecords([game]);
     socket.emit("gameOpenResponse", payload);
+    io.emit("gameOpen", payload);
   });
 
   socket.on("gameResponse", async (response) => {
