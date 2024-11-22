@@ -59,7 +59,7 @@ const handleOpenGame = async () => {
 
   const testGame = {
     gameId: answers.gameId,
-    fixtureId: "4506482",
+    fixtureId: "4506542",
     type,
     content: answers.content,
     timeout: 60,

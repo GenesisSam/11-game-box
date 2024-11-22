@@ -67,7 +67,7 @@ export default function GameContextProvider({
 
       timerId = setInterval(() => {
         socket.emit("requestResponseList");
-      }, 1000);
+      }, 5000);
       return () => {
         clearInterval(timerId);
         socket.disconnect();

@@ -28,7 +28,7 @@ export default function SocketProvider(props: React.PropsWithChildren) {
   const makeGame = React.useCallback(
     (payload: IGameCreatePayload) => {
       if (socketInst) {
-        payload.fixtureId = payload.fixtureId ?? "4506482";
+        payload.fixtureId = payload.fixtureId ?? "4506542";
         console.log("[Sys] 게임 생성 중...");
         socketInst.emit("gameOpen", payload);
         socketInst.emit("requestGameList");

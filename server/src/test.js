@@ -43,7 +43,7 @@ const readCsvFile = (filePath) => {
   await openedGamesCsvWriter.writeRecords([
     {
       gameId: "G0001",
-      fixtureId: "4506482",
+      fixtureId: "4506542",
       type: "vote",
       content: "hi~!",
       timeout: 60,
