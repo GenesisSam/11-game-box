@@ -22,7 +22,7 @@ const SocketContext = React.createContext<IState>({
   makeGame: () => {},
 });
 
-export default function SocketProvider(props: React.PropsWithChildren<{}>) {
+export default function SocketProvider(props: React.PropsWithChildren) {
   const [socketInst, setInstance] = React.useState<Socket | null>(null);
 
   const makeGame = React.useCallback(

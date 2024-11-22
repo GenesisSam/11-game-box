@@ -12,7 +12,6 @@ const GameContext = React.createContext<IState>({
   responses: {},
 });
 
-const fixtureId = "4506482";
 let timerId: NodeJS.Timeout | undefined;
 let didInit = false;
 
