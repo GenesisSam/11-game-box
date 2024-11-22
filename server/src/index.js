@@ -5,7 +5,6 @@ const { instrument } = require("@socket.io/admin-ui");
 const { createObjectCsvWriter } = require("csv-writer");
 const fs = require("fs");
 const csv = require("csv-parser");
-const cors = require("cors");
 
 const CORS = [
   "http://localhost:3000",
@@ -15,12 +14,7 @@ const CORS = [
 ];
 
 const app = express();
-app.use(
-  cors({
-    origin: CORS,
-    credentials: true,
-  })
-);
+app.use();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
