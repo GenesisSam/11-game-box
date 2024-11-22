@@ -30,7 +30,7 @@ const openedGamesCsvWriter = createObjectCsvWriter({
     { id: "timeout", title: "timeout" },
     { id: "options", title: "options" },
   ],
-  append: true,
+  append: fs.existsSync("openedGames.csv"),
   writeHeaders: !fs.existsSync("openedGames.csv"),
 });
 
@@ -43,7 +43,7 @@ const userResponseCsvWriter = createObjectCsvWriter({
     { id: "userName", title: "userName" },
     { id: "answer", title: "answer" },
   ],
-  append: true,
+  append: fs.existsSync("userResponse.csv"),
   writeHeaders: !fs.existsSync("userResponse.csv"),
 });
 

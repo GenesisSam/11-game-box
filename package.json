@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "admin": "node ./test/admin.js",
     "playground": "node test/playground.js"
   },
   "dependencies": {
@@ -22,6 +23,8 @@
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "inquirer": "^12.1.0",
+    "nodemon": "^3.0.1",
+    "yargs": "^17.7.2"
   }
 }
