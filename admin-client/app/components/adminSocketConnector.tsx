@@ -39,14 +39,21 @@ export default function SocketProvider(props: React.PropsWithChildren) {
 
   React.useEffect(() => {
     if (initDid) return;
-    const socket = io("http://localhost:3000", {
-      transports: ["websocket"],
-    });
-    socket.on("connect", () => {
-      console.log("[Sys] 서버에 연결되었습니다!");
-    });
-    initDid = true;
-    setInstance(socket);
+    try {
+      const socket = io(
+        "https://11-game-box-socket-fly-broken-resonance-2694.fly.dev",
+        {
+          transports: ["websocket"],
+        }
+      );
+      socket.on("connect", () => {
+        console.log("[Sys] 서버에 연결되었습니다!");
+      });
+      initDid = true;
+      setInstance(socket);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
